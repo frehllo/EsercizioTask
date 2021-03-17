@@ -34,20 +34,17 @@ namespace MultipliWPF
             {
                 if(i % divisore == 0)
                 {
-                    multipli++;
-                    txt_nM.Text = $"{multipli}";
+                    txt_nM.Text = $"{multipli++}";
                 }
             }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string divisore = txt_nA.Text;
-            int d = Int32.Parse(divisore);
-            Task<int> t1 = (Task<int>)Task.Factory.StartNew(() => CalcolaMultipli(d),
-                CancellationToken.None, //Se posso interrompere il Task
-                TaskCreationOptions.LongRunning, //Non permermette di avviare Task figli
-                TaskScheduler.Default // Scelgo come devono essere gestiti i Task
+            Task<int> t1 = (Task<int>)Task.Factory.StartNew(() => CalcolaMultipli(Int32.Parse(txt_nA.Text)),
+                CancellationToken.None,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Default
                 );
         }
     }
